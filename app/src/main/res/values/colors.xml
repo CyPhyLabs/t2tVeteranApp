@@ -144,4 +144,5 @@
     <color name="gradientStart">#C96466</color>
     <color name="gradientEnd">#657AD0</color>
     <color name="gradientCenter">#976F9B</color>
+    <color name="headings">#FFFFFF</color>
 </resources>
