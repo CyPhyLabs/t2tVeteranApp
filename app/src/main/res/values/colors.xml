@@ -140,4 +140,9 @@
     <color name="dark_blue">#00008B</color>
     <color name="navy">#000080</color>
     <color name="black">#000000</color>
+    <color name="transparent">#00000000</color>
+    <color name="gradientStart">#C96466</color>
+    <color name="gradientEnd">#657AD0</color>
+    <color name="gradientCenter">#976F9B</color>
+    <color name="headings">#FFFFFF</color>
 </resources>

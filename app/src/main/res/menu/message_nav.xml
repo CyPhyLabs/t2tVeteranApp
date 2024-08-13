@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/unread" android:title="Unread" />
+
+    <item android:id="@+id/priority" android:title="Priority"/>
+
+    <item android:id="@+id/inbox" android:title="Inbox"/>
+</menu>
