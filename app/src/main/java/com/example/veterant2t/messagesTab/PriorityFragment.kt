@@ -40,6 +40,7 @@ class PriorityFragment : Fragment() {
 
                 val builder:AlertDialog.Builder = AlertDialog.Builder(requireContext())
                 val message:Message?=NotifFragment.MessageMaster.getMessageById(id)
+                message?.acknowledge=true
                 builder.setTitle(message?.subject)
                 builder.setMessage(message?.body)
                 builder.setNegativeButton("Close"

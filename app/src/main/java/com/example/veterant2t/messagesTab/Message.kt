@@ -11,6 +11,7 @@ data class Message(
     val status: String = "queued",
     val scheduled_time: String? = null,
     val created_at: String,
+    var acknowledge:Boolean = false
 )
 
 /*

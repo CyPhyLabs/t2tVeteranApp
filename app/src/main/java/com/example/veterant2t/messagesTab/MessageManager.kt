@@ -25,10 +25,21 @@ public class MessageManager() {
         return messages
     }
 
-    fun getPriorityMessages(): List<Message> {
-        return messages.filter { it.priority == "urgent" || it.priority == "emergency" }
+    fun updateMessageList(){
+        //call endpoint to get new messages
     }
 
+    fun getPriorityMessages(): List<Message> {
+        return messages.filter { (it.priority == "urgent" || it.priority == "emergency") && (it.acknowledge==false) }
+    }
+
+    fun updateAcknowledge(id: Int){
+        val message = messages.find { it.id == id }
+        message?.acknowledge = true
+    }
+    fun getUnreadMessages(): List<Message> {
+        return messages.filter { !it.acknowledge }
+    }
 
     fun getMessageById(id: Int): Message? {
         return messages.find { it.id == id }
