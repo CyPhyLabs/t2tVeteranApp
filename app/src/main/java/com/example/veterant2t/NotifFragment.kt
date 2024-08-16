@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.viewpager2.widget.ViewPager2
 import com.example.veterant2t.databinding.FragmentNotificationsBinding
+import com.example.veterant2t.messagesTab.MessageManager
 import com.example.veterant2t.messagesTab.NotifPagerAdapter
 import com.google.android.material.tabs.TabLayout
 
@@ -22,6 +23,10 @@ class NotifFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+    }
+
+    companion object{
+        val MessageMaster=MessageManager()
     }
 
     override fun onCreateView(
@@ -42,6 +47,7 @@ class NotifFragment : Fragment() {
         tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 viewPager.setCurrentItem(tab!!.position)
+
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab?) {
