@@ -85,7 +85,7 @@
             android:layout_width="24dp"
             android:layout_height="23dp"
             android:scaleType="fitXY"
-            android:src="@mipmap/openmessageicon"
+            android:src="@mipmap/openmessageicon"/>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
