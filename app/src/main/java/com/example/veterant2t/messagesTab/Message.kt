@@ -1,7 +1,9 @@
 package com.example.veterant2t.messagesTab
 
+import java.util.UUID
+
 data class Message(
-    val id: Long,
+    val id: Int,
     val subject: String = "Important Message",
     val body: String = "This is an important message.",
     val priority: String = "normal",

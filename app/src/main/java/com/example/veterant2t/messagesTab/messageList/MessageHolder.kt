@@ -11,4 +11,5 @@ class MessageHolder(itemView:View) : RecyclerView.ViewHolder(itemView) {
     open val subjectBox:TextView = itemView.findViewById(R.id.subjectLine)
     open val oneLineDescription:TextView=itemView.findViewById(R.id.messageDescription)
     open val priorityImage:ImageView=itemView.findViewById(R.id.messageIcon)
+    open val messageContainer:View=itemView.findViewById(R.id.messageHolder)
 }
