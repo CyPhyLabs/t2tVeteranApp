@@ -50,7 +50,32 @@ public class MessageManager() {
 
     }
 
+    fun removeAtIndex(index:Int,type:String){
+        if(type=="priority"){
+            priorityMessages.removeAt(index)
+        }
+        else if(type=="unread"){
+            unreadMessages.removeAt(index)
+        }
+    }
 
+    fun indexToRemoveAtPriority(id:Int):Int{
+        for (index in 0 until priorityMessages.size){
+            if (priorityMessages[index].id == id){
+                return index
+            }
+        }
+        return -1
+    }
+
+    fun indexToRemoveAtUnread(id:Int):Int{
+        for (index in 0 until unreadMessages.size){
+            if (unreadMessages[index].id == id){
+                return index
+            }
+        }
+        return -1
+    }
 
     fun getPriorityMessages(): MutableList<Message> {
         return  priorityMessages

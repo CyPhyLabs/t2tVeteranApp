@@ -46,8 +46,10 @@ class UnreadFragment : Fragment() {
                 builder.setNegativeButton("Close"
                 ) { dialog, which -> run(){
                     dialog?.dismiss()
-                    NotifFragment.MessageMaster.updateMessageList()
-                    adapter.notifyItemRemoved(NotifFragment.MessageMaster.getUnreadMessages().indexOf(message))
+
+                    val index = NotifFragment.MessageMaster.indexToRemoveAtUnread(id)
+                    NotifFragment.MessageMaster.removeAtIndex(index,"unread")
+                    adapter.notifyItemRemoved(index)
                 } }
                 builder.show()
             }

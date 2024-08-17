@@ -51,8 +51,9 @@ class PriorityFragment : Fragment() {
                 builder.setNegativeButton("Close"
                 ) { dialog, which -> run(){
                     dialog?.dismiss()
-                    NotifFragment.MessageMaster.updateMessageList()
-                    adapter.notifyItemRemoved(NotifFragment.MessageMaster.getPriorityMessages().indexOf(message))
+                    val index = NotifFragment.MessageMaster.indexToRemoveAtPriority(id)
+                    NotifFragment.MessageMaster.removeAtIndex(index,"priority")
+                    adapter.notifyItemRemoved(index)
                 } }
                 builder.show()
             }
