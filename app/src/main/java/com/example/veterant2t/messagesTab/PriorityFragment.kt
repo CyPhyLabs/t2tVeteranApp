@@ -1,23 +1,17 @@
 package com.example.veterant2t.messagesTab
 
-import android.content.DialogInterface
-import android.graphics.Color
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.veterant2t.NotifFragment
 import com.example.veterant2t.R
 import com.example.veterant2t.messagesTab.messageList.CustomAdapter
-import com.example.veterant2t.messagesTab.MessageManager
 import com.example.veterant2t.messagesTab.messageList.IClickListener
-import java.util.UUID
-import java.util.ArrayList
 
 
 class PriorityFragment(private val adapter: CustomAdapter?) : Fragment() {
@@ -44,19 +38,19 @@ class PriorityFragment(private val adapter: CustomAdapter?) : Fragment() {
             override fun onItemClick(id: Int, position: Int) {
                 // Create an AlertDialog to show the message details
                 val builder:AlertDialog.Builder = AlertDialog.Builder(requireContext())
-                val message:Message?=NotifFragment.MessageMaster.getMessageById(id)
+                val message:Message?=MessageManager.getMessageById(id)
                 message?.acknowledge=true
                 builder.setTitle(message?.subject)
                 builder.setMessage(message?.body)
                 builder.setNegativeButton("Close"
                 ) { dialog, which -> run(){
                     dialog?.dismiss()
-                    val index = NotifFragment.MessageMaster.indexToRemoveAt(id,"priority")
-                    val indexUnread=NotifFragment.MessageMaster.indexToRemoveAt(id,"unread")
-                    val inboxIndex=NotifFragment.MessageMaster.indexToRemoveAt(id,"inbox")
-                    NotifFragment.MessageMaster.removeAtIndex(index,"priority")
-                    NotifFragment.MessageMaster.removeAtIndex(indexUnread,"unread")
-                    NotifFragment.MessageMaster.removeAtIndex(inboxIndex,"inbox")
+                    val index = MessageManager.indexToRemoveAt(id,"priority")
+                    val indexUnread=MessageManager.indexToRemoveAt(id,"unread")
+                    val inboxIndex=MessageManager.indexToRemoveAt(id,"inbox")
+                    MessageManager.removeAtIndex(index,"priority")
+                    MessageManager.removeAtIndex(indexUnread,"unread")
+                    MessageManager.removeAtIndex(inboxIndex,"inbox")
 
                 } }
                 builder.show()

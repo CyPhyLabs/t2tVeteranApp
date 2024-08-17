@@ -35,14 +35,14 @@ class InboxFragment(private val adapter: CustomAdapter?) : Fragment() {
             override fun onItemClick(id: Int, position: Int) {
                 // Create an AlertDialog to show the message details
                 val builder: AlertDialog.Builder = AlertDialog.Builder(requireContext())
-                val message:Message?=NotifFragment.MessageMaster.getMessageById(id)
+                val message:Message?=MessageManager.getMessageById(id)
                 message?.acknowledge=true
                 builder.setTitle(message?.subject)
                 builder.setMessage(message?.body)
                 builder.setNegativeButton("Close"
                 ) { dialog, which -> run(){
                     dialog?.dismiss()
-                    NotifFragment.MessageMaster.removeAtIndex(NotifFragment.MessageMaster.indexToRemoveAt(id,"inbox"),"inbox")
+                    MessageManager.removeAtIndex(MessageManager.indexToRemoveAt(id,"inbox"),"inbox")
                 } }
                 builder.show()
             }

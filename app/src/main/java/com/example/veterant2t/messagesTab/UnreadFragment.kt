@@ -32,14 +32,14 @@ class UnreadFragment(private val adapter: CustomAdapter?) : Fragment() {
         val recyclerView = view.findViewById<RecyclerView>(R.id.unreadRecyclerView)
 
         // Create an adapter with the priority messages from MessageMaster
-        val adapter:CustomAdapter = CustomAdapter(NotifFragment.MessageMaster.getUnreadMessages())
+
 
         // Set an item click listener for the adapter
-        adapter.setOnClickListener(object: IClickListener {
+        adapter?.setOnClickListener(object: IClickListener {
             override fun onItemClick(id: Int, position: Int) {
                 // Create an AlertDialog to show the message details
                 val builder:AlertDialog.Builder = AlertDialog.Builder(requireContext())
-                val message:Message?=NotifFragment.MessageMaster.getMessageById(id)
+                val message:Message?=MessageManager.getMessageById(id)
                 println("MessageID: $id")
                 message?.acknowledge =true
 
@@ -49,10 +49,10 @@ class UnreadFragment(private val adapter: CustomAdapter?) : Fragment() {
                 ) { dialog, _ -> run(){
                     dialog?.dismiss()
 
-                    val index = NotifFragment.MessageMaster.indexToRemoveAt(id,"unread")
-                    val inboxIndex=NotifFragment.MessageMaster.indexToRemoveAt(id,"inbox")
-                    NotifFragment.MessageMaster.removeAtIndex(index,"unread")
-                    NotifFragment.MessageMaster.removeAtIndex(inboxIndex,"inbox")
+                    val index = MessageManager.indexToRemoveAt(id,"unread")
+                    val inboxIndex=MessageManager.indexToRemoveAt(id,"inbox")
+                    MessageManager.removeAtIndex(index,"unread")
+                    MessageManager.removeAtIndex(inboxIndex,"inbox")
 
                 } }
                 builder.show()

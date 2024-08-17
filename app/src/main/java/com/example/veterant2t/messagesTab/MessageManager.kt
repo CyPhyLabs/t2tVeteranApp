@@ -2,7 +2,7 @@ package com.example.veterant2t.messagesTab
 
 import com.example.veterant2t.messagesTab.messageList.CustomAdapter
 
-public class MessageManager() {
+object MessageManager {
     private val messages = mutableListOf<Message>()
     private val priorityMessages = mutableListOf<Message>()
     private val unreadMessages= mutableListOf<Message>()
