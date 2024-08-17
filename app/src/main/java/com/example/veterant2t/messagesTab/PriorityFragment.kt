@@ -20,7 +20,7 @@ import java.util.UUID
 import java.util.ArrayList
 
 
-class PriorityFragment : Fragment() {
+class PriorityFragment(private val adapter: CustomAdapter?) : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,10 +37,10 @@ class PriorityFragment : Fragment() {
         val recyclerView = view.findViewById<RecyclerView>(R.id.priorityRecyclerView)
 
         // Create an adapter with the priority messages from MessageMaster
-        val adapter:CustomAdapter = CustomAdapter(NotifFragment.MessageMaster.getPriorityMessages())
+
 
         // Set an item click listener for the adapter
-        adapter.setOnClickListener(object: IClickListener {
+        adapter?.setOnClickListener(object: IClickListener {
             override fun onItemClick(id: Int, position: Int) {
                 // Create an AlertDialog to show the message details
                 val builder:AlertDialog.Builder = AlertDialog.Builder(requireContext())
@@ -51,9 +51,13 @@ class PriorityFragment : Fragment() {
                 builder.setNegativeButton("Close"
                 ) { dialog, which -> run(){
                     dialog?.dismiss()
-                    val index = NotifFragment.MessageMaster.indexToRemoveAtPriority(id)
+                    val index = NotifFragment.MessageMaster.indexToRemoveAt(id,"priority")
+                    val indexUnread=NotifFragment.MessageMaster.indexToRemoveAt(id,"unread")
+                    val inboxIndex=NotifFragment.MessageMaster.indexToRemoveAt(id,"inbox")
                     NotifFragment.MessageMaster.removeAtIndex(index,"priority")
-                    adapter.notifyItemRemoved(index)
+                    NotifFragment.MessageMaster.removeAtIndex(indexUnread,"unread")
+                    NotifFragment.MessageMaster.removeAtIndex(inboxIndex,"inbox")
+
                 } }
                 builder.show()
             }

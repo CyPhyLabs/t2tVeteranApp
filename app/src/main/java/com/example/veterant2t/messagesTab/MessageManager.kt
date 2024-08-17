@@ -1,9 +1,15 @@
 package com.example.veterant2t.messagesTab
 
+import com.example.veterant2t.messagesTab.messageList.CustomAdapter
+
 public class MessageManager() {
     private val messages = mutableListOf<Message>()
     private val priorityMessages = mutableListOf<Message>()
     private val unreadMessages= mutableListOf<Message>()
+
+    var priorityAdapter: CustomAdapter? = null
+    var unreadAdapter: CustomAdapter? = null
+    var inboxAdapter: CustomAdapter? = null
 
     init {
         //Potentially Fetch messages from backend here?
@@ -28,6 +34,10 @@ public class MessageManager() {
                 unreadMessages.add(message)
             }
         }
+
+        priorityAdapter= CustomAdapter(priorityMessages)
+        unreadAdapter= CustomAdapter(unreadMessages)
+        inboxAdapter= CustomAdapter(messages)
     }
 
 
@@ -50,32 +60,55 @@ public class MessageManager() {
 
     }
 
-    fun removeAtIndex(index:Int,type:String){
-        if(type=="priority"){
-            priorityMessages.removeAt(index)
-        }
-        else if(type=="unread"){
-            unreadMessages.removeAt(index)
+    fun removeAtIndex(index: Int, listType: String) {
+        when (listType) {
+            "priority" -> {
+                priorityMessages.removeAt(index)
+                priorityAdapter?.notifyItemRemoved(index)
+                priorityAdapter?.notifyItemRangeChanged(index, priorityMessages.size)
+            }
+            "unread" -> {
+
+                unreadMessages.removeAt(index)
+                unreadAdapter?.notifyItemRemoved(index)
+                unreadAdapter?.notifyItemRangeChanged(index, unreadMessages.size)
+                println(unreadMessages)
+            }
+            "inbox" -> {
+                inboxAdapter?.notifyItemChanged(index)
+
+            }
         }
     }
 
-    fun indexToRemoveAtPriority(id:Int):Int{
-        for (index in 0 until priorityMessages.size){
-            if (priorityMessages[index].id == id){
-                return index
+    fun indexToRemoveAt(id:Int,listType: String):Int{
+        when(listType){
+            "priority" -> {
+                for (index in 0 until priorityMessages.size){
+                    if (priorityMessages[index].id == id){
+                        return index
+                    }
+                }
+            }
+            "unread" -> {
+                for (index in 0 until unreadMessages.size){
+                    if (unreadMessages[index].id == id){
+                        return index
+                    }
+                }
+            }
+            "inbox" -> {
+                for (index in 0 until messages.size){
+                    if (messages[index].id == id){
+                        return index
+                    }
+                }
             }
         }
         return -1
     }
 
-    fun indexToRemoveAtUnread(id:Int):Int{
-        for (index in 0 until unreadMessages.size){
-            if (unreadMessages[index].id == id){
-                return index
-            }
-        }
-        return -1
-    }
+
 
     fun getPriorityMessages(): MutableList<Message> {
         return  priorityMessages

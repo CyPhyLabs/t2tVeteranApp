@@ -14,7 +14,7 @@ import com.example.veterant2t.messagesTab.messageList.CustomAdapter
 import com.example.veterant2t.messagesTab.messageList.IClickListener
 
 
-class InboxFragment : Fragment() {
+class InboxFragment(private val adapter: CustomAdapter?) : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,9 +29,9 @@ class InboxFragment : Fragment() {
 
         val recyclerView = view.findViewById<RecyclerView>(R.id.inboxRecyclerView)
 
-        val adapter: CustomAdapter = CustomAdapter(NotifFragment.MessageMaster.getMessages())
 
-        adapter.setOnClickListener(object: IClickListener {
+
+        adapter?.setOnClickListener(object: IClickListener {
             override fun onItemClick(id: Int, position: Int) {
                 // Create an AlertDialog to show the message details
                 val builder: AlertDialog.Builder = AlertDialog.Builder(requireContext())
@@ -42,8 +42,7 @@ class InboxFragment : Fragment() {
                 builder.setNegativeButton("Close"
                 ) { dialog, which -> run(){
                     dialog?.dismiss()
-                    NotifFragment.MessageMaster.updateMessageList()
-                    adapter.notifyItemChanged(position)
+                    NotifFragment.MessageMaster.removeAtIndex(NotifFragment.MessageMaster.indexToRemoveAt(id,"inbox"),"inbox")
                 } }
                 builder.show()
             }

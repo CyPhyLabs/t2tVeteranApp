@@ -14,7 +14,7 @@ import com.example.veterant2t.messagesTab.messageList.CustomAdapter
 import com.example.veterant2t.messagesTab.messageList.IClickListener
 
 
-class UnreadFragment : Fragment() {
+class UnreadFragment(private val adapter: CustomAdapter?) : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,16 +40,20 @@ class UnreadFragment : Fragment() {
                 // Create an AlertDialog to show the message details
                 val builder:AlertDialog.Builder = AlertDialog.Builder(requireContext())
                 val message:Message?=NotifFragment.MessageMaster.getMessageById(id)
-                message?.acknowledge=true
+                println("MessageID: $id")
+                message?.acknowledge =true
+
                 builder.setTitle(message?.subject)
                 builder.setMessage(message?.body)
                 builder.setNegativeButton("Close"
-                ) { dialog, which -> run(){
+                ) { dialog, _ -> run(){
                     dialog?.dismiss()
 
-                    val index = NotifFragment.MessageMaster.indexToRemoveAtUnread(id)
+                    val index = NotifFragment.MessageMaster.indexToRemoveAt(id,"unread")
+                    val inboxIndex=NotifFragment.MessageMaster.indexToRemoveAt(id,"inbox")
                     NotifFragment.MessageMaster.removeAtIndex(index,"unread")
-                    adapter.notifyItemRemoved(index)
+                    NotifFragment.MessageMaster.removeAtIndex(inboxIndex,"inbox")
+
                 } }
                 builder.show()
             }
@@ -58,4 +62,6 @@ class UnreadFragment : Fragment() {
         recyclerView.adapter = adapter
 
     }
+
+
 }

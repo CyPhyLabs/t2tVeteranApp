@@ -42,6 +42,8 @@ class NotifFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
+
         tabLayout = view.findViewById(R.id.tabLayout)
         viewPager = view.findViewById(R.id.viewPager)
 
