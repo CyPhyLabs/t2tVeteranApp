@@ -12,7 +12,7 @@ import com.example.veterant2t.databinding.ActivityHomeScreenBinding
 
 class HomeScreen : AppCompatActivity() {
 
-    private lateinit var binding: ActivityHomeScreenBinding
+    public lateinit var binding: ActivityHomeScreenBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
