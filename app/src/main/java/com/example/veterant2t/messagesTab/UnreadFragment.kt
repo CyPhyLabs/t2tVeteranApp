@@ -23,4 +23,37 @@ class UnreadFragment : Fragment() {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_unread, container, false)
     }
+
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        // Find the RecyclerView in the layout
+        val recyclerView = view.findViewById<RecyclerView>(R.id.unreadRecyclerView)
+
+        // Create an adapter with the priority messages from MessageMaster
+        val adapter:CustomAdapter = CustomAdapter(NotifFragment.MessageMaster.getUnreadMessages())
+
+        // Set an item click listener for the adapter
+        adapter.setOnClickListener(object: IClickListener {
+            override fun onItemClick(id: Int, position: Int) {
+                // Create an AlertDialog to show the message details
+                val builder:AlertDialog.Builder = AlertDialog.Builder(requireContext())
+                val message:Message?=NotifFragment.MessageMaster.getMessageById(id)
+                message?.acknowledge=true
+                builder.setTitle(message?.subject)
+                builder.setMessage(message?.body)
+                builder.setNegativeButton("Close"
+                ) { dialog, which -> run(){
+                    dialog?.dismiss()
+                    NotifFragment.MessageMaster.updateMessageList()
+                    adapter.notifyItemRemoved(NotifFragment.MessageMaster.getUnreadMessages().indexOf(message))
+                } }
+                builder.show()
+            }
+        })
+        recyclerView.layoutManager= LinearLayoutManager(this.context)
+        recyclerView.adapter = adapter
+
+    }
 }

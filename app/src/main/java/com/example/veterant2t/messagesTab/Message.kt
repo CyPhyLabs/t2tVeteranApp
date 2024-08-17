@@ -3,6 +3,7 @@ package com.example.veterant2t.messagesTab
 import java.util.UUID
 
 data class Message(
+    var acknowledge:Boolean = false,
     val id: Int,
     val subject: String = "Important Message",
     val body: String = "This is an important message.",
@@ -11,7 +12,6 @@ data class Message(
     val status: String = "queued",
     val scheduled_time: String? = null,
     val created_at: String,
-    var acknowledge:Boolean = false
 )
 
 /*
