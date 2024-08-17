@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".messagesTab.PriorityFragment">
 
-    <!-- TODO: Update blank fragment layout -->
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/priorityRecyclerView"
         android:layout_width="0dp"

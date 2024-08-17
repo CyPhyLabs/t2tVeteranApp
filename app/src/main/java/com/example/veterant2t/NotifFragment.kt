@@ -25,9 +25,7 @@ class NotifFragment : Fragment() {
 
     }
 
-    companion object{
-        val MessageMaster=MessageManager()
-    }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,13 +38,15 @@ class NotifFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
+
         tabLayout = view.findViewById(R.id.tabLayout)
         viewPager = view.findViewById(R.id.viewPager)
 
         viewPager.adapter=NotifPagerAdapter(this)
         tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
-                viewPager.setCurrentItem(tab!!.position)
+                viewPager.currentItem = tab!!.position
 
             }
 
@@ -68,4 +68,9 @@ class NotifFragment : Fragment() {
         })
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
+
+    }
 }

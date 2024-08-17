@@ -24,5 +24,6 @@ class MainActivity : AppCompatActivity() {
     fun goNextScene(view: View){
         val intent= Intent(this, HomeScreen::class.java)
         startActivity(intent)
+
     }
 }
