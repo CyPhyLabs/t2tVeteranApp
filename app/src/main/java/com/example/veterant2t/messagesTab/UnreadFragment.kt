@@ -13,7 +13,6 @@ import com.example.veterant2t.R
 import com.example.veterant2t.messagesTab.messageList.CustomAdapter
 import com.example.veterant2t.messagesTab.messageList.IClickListener
 
-
 class UnreadFragment(private val adapter: CustomAdapter?) : Fragment() {
 
     override fun onCreateView(
@@ -24,15 +23,11 @@ class UnreadFragment(private val adapter: CustomAdapter?) : Fragment() {
         return inflater.inflate(R.layout.fragment_unread, container, false)
     }
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         // Find the RecyclerView in the layout
         val recyclerView = view.findViewById<RecyclerView>(R.id.unreadRecyclerView)
-
-        // Create an adapter with the priority messages from MessageMaster
-
 
         // Set an item click listener for the adapter
         adapter?.setOnClickListener(object: IClickListener {
@@ -60,8 +55,9 @@ class UnreadFragment(private val adapter: CustomAdapter?) : Fragment() {
         })
         recyclerView.layoutManager= LinearLayoutManager(this.context)
         recyclerView.adapter = adapter
-
     }
 
-
+    fun getFirstTwoMessages(): List<Message> {
+        return MessageManager.getUnreadMessages().take(2)
+    }
 }
