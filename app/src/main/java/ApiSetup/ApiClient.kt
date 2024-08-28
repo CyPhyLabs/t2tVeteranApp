@@ -20,6 +20,7 @@ object ApiClient {
     val baseURL: String = "http://10.0.2.2:8000/"
     val retrofit = Retrofit.Builder()
         .baseUrl(baseURL)
+        .client(client)
         .addConverterFactory(GsonConverterFactory.create())
         .build()
     val authService=retrofit.create(AuthService::class.java)
@@ -39,7 +40,9 @@ interface AuthService{
 
 data class loginRequest(
     val username: String,
-    val password: String
+    val password: String,
+    val email: String
+
 )
 
 data class loginResponse(val access: String, val refresh: String)

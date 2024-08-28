@@ -58,7 +58,7 @@ class LoginActivity : AppCompatActivity() {
         val obj:JSONObject = JSONObject()
         obj.put("username", username)
         obj.put("password", password)
-        val response: Call<loginResponse> = authentication.login(loginRequest(username, password))
+        val response: Call<loginResponse> = authentication.login(loginRequest(username, password, username))
         response.enqueue(object : Callback<loginResponse> {
 
 
