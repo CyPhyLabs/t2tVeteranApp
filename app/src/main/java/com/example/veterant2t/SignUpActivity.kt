@@ -1,11 +1,18 @@
 package com.example.veterant2t
 
+import ApiSetup.ApiClient
+import ApiSetup.registerRequest
+import ApiSetup.registerResponse
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import org.json.JSONObject
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class SignUpActivity : AppCompatActivity() {
 
@@ -34,11 +41,40 @@ class SignUpActivity : AppCompatActivity() {
             // Proceed with sign-up process
             Toast.makeText(this, "Sign Up successful", Toast.LENGTH_SHORT).show()
             // Add your sign-up logic here
-
+            registerUser(username, password)
             // Navigate back to LoginActivity
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
             finish()
         }
+    }
+
+    private fun registerUser(username: String, password: String) {
+        val authService= ApiClient.authService
+
+        val obj: JSONObject = JSONObject()
+        obj.put("username", username)
+        obj.put("email", username)
+        obj.put("password", password)
+        val call = authService.register(registerRequest(username, username, password))
+        call.enqueue(object : Callback<registerResponse>{
+            override fun onResponse(call: Call<registerResponse>, response: Response<registerResponse>)
+            {
+                if(response.isSuccessful){
+                    Toast.makeText(this@SignUpActivity, "Sign Up successful", Toast.LENGTH_SHORT).show()
+                }
+                else{
+                    Toast.makeText(this@SignUpActivity, "Sign Up failed", Toast.LENGTH_SHORT).show()
+                }
+
+            }
+
+            override fun onFailure(call: Call<registerResponse>, t: Throwable) {
+                println(t.message)
+                println(t.cause)
+            }
+
+        })
+
     }
 }
