@@ -1,9 +1,9 @@
 package com.example.veterant2t
 
-import ApiSetup.ApiClient
-import ApiSetup.AuthService
-import ApiSetup.loginRequest
-import ApiSetup.loginResponse
+import com.example.veterant2t.ApiSetup.ApiClient
+import com.example.veterant2t.ApiSetup.AuthService
+import com.example.veterant2t.ApiSetup.loginRequest
+import com.example.veterant2t.ApiSetup.loginResponse
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
@@ -55,19 +55,20 @@ class LoginActivity : AppCompatActivity() {
     private fun loginUser(username: String, password: String) {
         val authentication = ApiClient.authService
 
-        val obj:JSONObject = JSONObject()
-        obj.put("username", username)
-        obj.put("password", password)
+
         val response: Call<loginResponse> = authentication.login(loginRequest(username, password, username))
         response.enqueue(object : Callback<loginResponse> {
 
 
             override fun onResponse(call: Call<loginResponse>, response: Response<loginResponse>) {
-                println(response.body())
+
                 if(response.isSuccessful) {
                     val loginResponse = response.body()
                     if (loginResponse != null) {
                         Toast.makeText(this@LoginActivity, "Login successful", Toast.LENGTH_SHORT).show()
+                        ApiClient.onLoginSuccess()
+                        val intent = Intent(this@LoginActivity, HomeScreen::class.java)
+                        startActivity(intent)
                     }
                 } else {
                     Toast.makeText(this@LoginActivity, "Invalid credentials", Toast.LENGTH_SHORT).show()

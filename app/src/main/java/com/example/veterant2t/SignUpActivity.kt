@@ -1,8 +1,8 @@
 package com.example.veterant2t
 
-import ApiSetup.ApiClient
-import ApiSetup.registerRequest
-import ApiSetup.registerResponse
+import com.example.veterant2t.ApiSetup.ApiClient
+import com.example.veterant2t.ApiSetup.registerRequest
+import com.example.veterant2t.ApiSetup.registerResponse
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
