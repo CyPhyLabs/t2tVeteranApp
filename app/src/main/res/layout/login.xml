@@ -1,63 +1,108 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/gradient"
     android:padding="16dp">
 
-    <EditText
-        android:id="@+id/usernameEditText"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="232dp"
-        android:hint="Username"
-        android:textColorHint="@color/light_grey"
-        android:inputType="text"
+    <TextView
+        android:id="@+id/welcomeTextView"
+        android:layout_width="344dp"
+        android:layout_height="109dp"
+        android:layout_marginTop="84dp"
+        android:fontFamily="serif"
+        android:text="Welcome to the __ portal, login with your username and password:"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.485"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/passwordEditText"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:hint="Password"
-        android:textColorHint="@color/light_grey"
-        android:inputType="textPassword"
-        app:layout_constraintTop_toBottomOf="@id/usernameEditText"
-        app:layout_constraintStart_toStartOf="parent"
+    <androidx.cardview.widget.CardView
+        android:layout_width="377dp"
+        android:layout_height="300dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginBottom="4dp"
+        android:backgroundTint="@color/white"
+        android:elevation="8dp"
+        android:padding="20dp"
+        app:cardCornerRadius="25dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        android:layout_marginTop="16dp" />
-
-    <Button
-        android:id="@+id/loginButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-
-        android:backgroundTint="#F9F8F8"
-        android:fontFamily="sans-serif"
-        android:text="Login"
-        android:textColor="@color/black"
-        android:textSize="19sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.51"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/passwordEditText" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/signUpTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:fontFamily="sans-serif"
-        android:text="Don't have an account? Sign Up!"
-        android:textColor="@color/white"
-        android:textSize="19sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/loginButton" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/usernameEditText"
+                android:layout_width="333dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:hint="Username"
+                android:inputType="text"
+                android:textColor="#343434"
+                android:textColorHint="@color/dim_gray"
+                android:textSize="21sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/passwordEditText"
+                android:layout_width="333dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:hint="Password"
+                android:inputType="textPassword"
+                android:textColor="#343434"
+                android:textColorHint="@color/dim_gray"
+                android:textSize="21sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/usernameEditText" />
+
+            <Button
+                android:id="@+id/loginButton"
+                android:layout_width="112dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+
+                android:backgroundTint="#6B7B85F0"
+                android:fontFamily="sans-serif"
+                android:text="Login"
+                android:textColor="@color/black"
+                android:textSize="22sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.7"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/passwordEditText" />
+
+            <TextView
+                android:id="@+id/signUpTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="53dp"
+                android:layout_marginTop="25dp"
+                android:fontFamily="sans-serif"
+                android:text="Don't have an account? Sign Up!"
+                android:textColor="@color/black"
+                android:textSize="21sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/loginButton" />
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
